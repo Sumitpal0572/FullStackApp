@@ -35,3 +35,7 @@ This project is a full-stack application built using React for the frontend and 
 - Express.js
 - JWT for authentication
 - MongoDB (or any other database).
+
+### Deployment link
+
+`https://github.com/Sumitpal0572/FullStackapp-backend`
