@@ -38,4 +38,4 @@ This project is a full-stack application built using React for the frontend and 
 
 ### Deployment link
 
-`https://github.com/Sumitpal0572/FullStackapp-backend`
+`https://full-stack-app-frontend-indol.vercel.app/`
