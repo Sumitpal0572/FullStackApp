@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ProductForm = ({ productId, fetchProducts, closeForm }) => {
   const [formData, setFormData] = useState({
@@ -17,12 +18,9 @@ const ProductForm = ({ productId, fetchProducts, closeForm }) => {
       // Fetch product details for editing
       const fetchProduct = async () => {
         try {
-          const res = await axios.get(
-            `http://localhost:1234/api/products/${productId}`,
-            {
-              headers: { Authorization: `Bearer ${auth.accessToken}` },
-            }
-          );
+          const res = await axios.get(`${API_URL}/api/products/${productId}`, {
+            headers: { Authorization: `Bearer ${auth.accessToken}` },
+          });
           setFormData(res.data);
         } catch (error) {
           setError("Failed to fetch product details.");
@@ -41,17 +39,13 @@ const ProductForm = ({ productId, fetchProducts, closeForm }) => {
     try {
       if (productId) {
         // Update existing product
-        await axios.put(
-          `http://localhost:1234/api/products/${productId}`,
-          formData,
-          {
-            headers: { Authorization: `Bearer ${auth.accessToken}` },
-          }
-        );
+        await axios.put(`${API_URL}/api/products/${productId}`, formData, {
+          headers: { Authorization: `Bearer ${auth.accessToken}` },
+        });
         setSuccess("Product updated successfully!");
       } else {
         // Create new product
-        await axios.post("http://localhost:3000/api/products", formData, {
+        await axios.post(`${API_URL}/api/products`, formData, {
           headers: { Authorization: `Bearer ${auth.accessToken}` },
         });
         setSuccess("Product created successfully!");

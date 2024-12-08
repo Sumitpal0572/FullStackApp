@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/auth/signup", formData);
+      await axios.post(`${API_URL}/api/auth/signup`, formData);
       setSuccess("Account created successfully! Redirecting to login...");
       setError("");
       setTimeout(() => navigate("/login"), 2000); // Redirect to login page after 2 seconds

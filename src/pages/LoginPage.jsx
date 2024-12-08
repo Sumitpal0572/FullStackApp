@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -19,10 +20,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        credentials
-      );
+      const res = await axios.post(`${API_URL}/api/auth/login`, credentials);
       // Use login function from AuthContext
       login(res.data.accessToken, res.data.refreshToken); // Pass both tokens to the login function
 

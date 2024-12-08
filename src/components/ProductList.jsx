@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ const ProductList = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/products");
+      const res = await axios.get(`${API_URL}/api/products`);
       setProducts(res.data);
     } catch (error) {
       setError("Failed to fetch products.");
@@ -18,7 +19,7 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/products/${id}`, {
+      await axios.delete(`${API_URL}/api/products/${id}`, {
         headers: { Authorization: `Bearer ${auth.accessToken}` },
       });
       fetchProducts();

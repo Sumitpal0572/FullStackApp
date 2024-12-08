@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -14,10 +15,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        formData
-      );
+      const res = await axios.post(`${API_URL}/api/auth/login`, formData);
       login(res.data.accessToken);
     } catch (error) {
       setError("Invalid credentials");
